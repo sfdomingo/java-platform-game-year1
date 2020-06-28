@@ -5,9 +5,12 @@
  */
 package game.panelsAndFrames;
 
-import city.cs.engine.SoundClip;
 import game.Game;
+import java.io.File;
 import java.io.IOException;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
@@ -17,9 +20,10 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  */
 public class MainMenu extends javax.swing.JFrame {
 
-    public static SoundClip titleMusic;
+    public static Clip clip;
     public static MainMenu menu = new MainMenu();
     public static Instructions instructions = new Instructions();
+
     /**
      * Creates new form MainMenu.
      */
@@ -29,10 +33,11 @@ public class MainMenu extends javax.swing.JFrame {
         getContentPane().setBackground(new java.awt.Color(100, 100, 100));
 
         try {
-            // Open an audio
-            titleMusic = new SoundClip("data/DokiDoki.mp3");
-            titleMusic.setVolume(0.4f);
-            titleMusic.loop();
+            File musicPath = new File("data/DokiDoki.wav");
+            AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+            clip = AudioSystem.getClip();
+            clip.open(audioInput);
+            clip.start();
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             System.out.println(e);
         }
@@ -67,7 +72,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         jPanel1.add(quit);
-        quit.setBounds(450, 370, 100, 40);
+        quit.setBounds(450, 380, 100, 40);
 
         start.setText("Start game");
         start.addActionListener(new java.awt.event.ActionListener() {
@@ -107,8 +112,8 @@ public class MainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startActionPerformed
-        //titleMusic.stop();
-        titleMusic.stop();
+        clip.stop();
+        clip.setMicrosecondPosition(0);
         new Game();
         this.setVisible(false);
     }//GEN-LAST:event_startActionPerformed

@@ -16,8 +16,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  * @author Sherwin
  */
 public class Instructions extends javax.swing.JFrame {
-    
-    
+
     /**
      * Creates new form MainMenu.
      */
@@ -100,7 +99,8 @@ public class Instructions extends javax.swing.JFrame {
 
     private void startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startActionPerformed
         //titleMusic.stop();
-        MainMenu.titleMusic.stop();
+        MainMenu.clip.stop();
+        MainMenu.clip.setMicrosecondPosition(0);
         new Game();
         this.dispose();
     }//GEN-LAST:event_startActionPerformed

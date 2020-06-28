@@ -155,7 +155,7 @@ public class ControlPanel extends javax.swing.JPanel {
         game.back();
         game.getPlayer().stopDeadMusic();
         MainMenu.menu.setVisible(true);
-        MainMenu.titleMusic.play();
+        MainMenu.clip.start();
     }//GEN-LAST:event_mainMenuActionPerformed
 
     private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
